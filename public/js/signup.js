@@ -1,3 +1,5 @@
+// var cityStates = require('public/js/citystates.js')
+
 $(document).ready(() => {
   // Getting references to our form and input
   const signUpForm = $("form.signup");
@@ -77,3 +79,20 @@ $(document).ready(() => {
     $("#alert").fadeIn(500);
   }
 });
+
+// $(document).ready(() => {
+//   searchAutoComplete();
+// });
+
+// function searchAutoComplete() {
+//   jQuery.get("public/js/citystates.js", data => {
+//     cityStates = data.toLowerCase().split("\n");
+//     cityNameInput
+//       .autocomplete({
+//         source: cityStates
+//       })
+//       .focus(function() {
+//         $(this).autocomplete("City", "");
+//       });
+//   });
+// };
