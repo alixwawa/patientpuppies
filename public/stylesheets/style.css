@@ -9,7 +9,7 @@ form.login {
 }
 
 body {
-  background-image: url(https://i.pinimg.com/564x/04/1e/56/041e568ee34b82e501f532d972dcbcff.jpg);
+  background-image: url("https://i.pinimg.com/564x/04/1e/56/041e568ee34b82e501f532d972dcbcff.jpg");
   color: whitesmoke;
 }
 
