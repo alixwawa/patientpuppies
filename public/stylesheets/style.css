@@ -2,3 +2,20 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+body {
+  background-image: url(https://i.pinimg.com/564x/04/1e/56/041e568ee34b82e501f532d972dcbcff.jpg);
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.navbar-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
