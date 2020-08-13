@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('https://www.fontspace.com/n%C3%A9o-party-font-f25303');
+}
+
 form.signup,
 form.login {
   margin-top: 50px;
@@ -10,6 +15,7 @@ body {
 
 h2 {
   color: whitesmoke;
+  font-family: 'MyWebFont'
 }
 
 .searchBar {
