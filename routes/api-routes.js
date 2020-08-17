@@ -75,7 +75,7 @@ module.exports = function(app) {
     // } else {
     //   // Otherwise send back the user's email and id
     //   // Sending back a password, even a hashed password, isn't a good idea
-console.log(req.user.email);
+
     db.User.update(
       {
         picURL: req.body.picURL

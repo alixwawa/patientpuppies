@@ -36,7 +36,7 @@ $(document).ready(() => {
           // processData: false,
           // contentType: false
         });
-        console.log(res.url);
+        location.reload();
       })
 
       // If there's an error, log the error
@@ -49,10 +49,14 @@ $(document).ready(() => {
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
   });
-  
+
   $.get("/api/get_pic").then(data => {
-    console.log("alix");
-    // response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
-    $("#picHere").html(`<img src="${data}" />`);
+    if (data) {
+      $("#picHere").html(`<img src="${data}" />`);
+    } else {
+      // response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
+
+      console.log("no pic");
+    }
   });
 });
