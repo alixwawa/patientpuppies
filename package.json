@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "npm run lint",
-    "start": "node server.js",
-    "lint": "eslint --quiet .",
+    "start": "nodemon server.js",
+    "lint": "eslint --fix .",
     "fix": "eslint --fix .",
     "watch": "nodemon server.js"
   },
@@ -14,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "2.4.3",
+    "cloudinary": "^1.22.0",
+    "cookie": "^0.4.1",
     "express": "^4.17.0",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.16.1",
@@ -33,6 +36,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
+    "nodemon": "^2.0.4",
     "prettier": "^1.13.7"
   }
 }

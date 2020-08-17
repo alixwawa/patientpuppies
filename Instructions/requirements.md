@@ -17,6 +17,7 @@
 * Must have a polished front end/UI
 
 * Must have a folder structure that meets the MVC paradigm
+    routes in controller folder
 
 * Must meet good quality coding standards (indentation, scoping, naming)
 

@@ -40,12 +40,16 @@ module.exports = function(app) {
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
+
     req.logout();
+    console.log("LOGOUT");
     res.redirect("/");
+
   });
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
+    // console.log(req.user)
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -55,6 +59,62 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.id
+      });
+    }
+  });
+
+
+
+  app.put("/api/user_pic", (req, res) => {
+    // if (!req.user) {
+
+    res.end();
+
+    //   // The user is not logged in, send back an empty object
+    //   res.json({});
+    // } else {
+    //   // Otherwise send back the user's email and id
+    //   // Sending back a password, even a hashed password, isn't a good idea
+console.log(req.user.email);
+    db.User.update(
+      {
+        picURL: req.body.picURL
+      },
+      {
+        where: {
+          email: req.user.email
+        }
+      }
+    );
+  });
+
+  app.get("/api/get_pic", (req, res) => {
+    if (!req.user) {
+      // console.log(req.user);
+      
+      res.end();
+      //   // console.log("im here");
+      //   //   // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      //   //   // Otherwise send back the user's email and id
+      //   //   // Sending back a password, even a hashed password, isn't a good idea
+
+      db.User.findOne(
+        // {
+        //   picURL: req.user.picURL
+        // },
+        {
+          where: {
+            id: req.user.id
+          }
+        }
+      ).then(picURL => {
+        // this works below
+        // console.log(res.dataValues.picURL);
+        
+        // return res.dataValues.picURL;
+        res.json(picURL.dataValues.picURL)
       });
     }
   });
