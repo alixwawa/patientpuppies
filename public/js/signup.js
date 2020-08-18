@@ -1,6 +1,7 @@
 let statesArray = [];
 let citiesArray = [];
 let input = document.querySelector("input");
+let userInput = $("#cityname-input");
 
 $(document).ready(() => {
   // Getting references to our form and input
@@ -83,8 +84,9 @@ $(document).ready(() => {
 
   searchCitiesAutoComplete = () => {
     jQuery.get("public/js/cities.txt", data => {
+      console.log("hi");
       citiesArray = data.toLowerCase().split("\n");
-      cityNameInput
+      userInput
         .autocomplete({
           source: citiesArray
         })
@@ -94,27 +96,32 @@ $(document).ready(() => {
     });
   };
 
-  searchStatesAutoComplete = () => {
-    jQuery.get("public/js/states.txt", data => {
-      statesArray = data.toLowerCase().split("\n");
-      stateNameInput
-        .autocomplete({
-          source: statesArray
-        })
-        .focus(function() {
-          $(this).autocomplete("search", "");
-        });
-    });
-  };
-});
+  // searchStatesAutoComplete = () => {
+  //   jQuery.get("public/js/states.txt", data => {
+  //     statesArray = data.toLowerCase().split("\n");
+  //     stateNameInput
+  //       .autocomplete({
+  //         source: statesArray
+  //       })
+  //       .focus(function() {
+  //         $(this).autocomplete("search", "");
+  //       });
+  //   });
+  // };
 
-input.addEventListener("keyup", event => {
-  console.log("start");
-  if (event.keyCode) {
-    event.preventDefault();
-    searchCitiesAutoComplete(userInput.val().toLowerCase());
-    searchStatesAutoComplete(userInput.val().toLowerCase());
-    userInput.val("");
-    console.log("end");
-  }
+  
+
+
+
+
+// input.addEventListener("keydown", event => {
+//   console.log("start");
+//   if (event.keyCode) {
+//     event.preventDefault();
+//     searchCitiesAutoComplete(userInput.val().toLowerCase());
+//     searchStatesAutoComplete(userInput.val().toLowerCase());
+//     userInput.val("");
+//     console.log("end");
+//   }
+// });
 });
