@@ -1,4 +1,6 @@
-// var cityStates = require('public/js/citystates.js')
+let statesArray = [];
+let citiesArray = [];
+let input = document.querySelector("input");
 
 $(document).ready(() => {
   // Getting references to our form and input
@@ -11,7 +13,7 @@ $(document).ready(() => {
   const stateNameInput = $("input#statename-input");
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", event => {
+  signUpForm.on("submit", (event) => {
     event.preventDefault();
     const userData = {
       email: emailInput.val().trim(),
@@ -19,7 +21,7 @@ $(document).ready(() => {
       firstName: firstNameInput.val().trim(),
       lastName: lastNameInput.val().trim(),
       cityName: cityNameInput.val().trim(),
-      stateName: stateNameInput.val().trim()
+      stateName: stateNameInput.val().trim(),
     };
 
     if (
@@ -65,7 +67,7 @@ $(document).ready(() => {
       firstName: firstName,
       lastName: lastName,
       cityName: cityName,
-      stateName: stateName
+      stateName: stateName,
     })
       .then(() => {
         window.location.replace("/members");
@@ -78,21 +80,41 @@ $(document).ready(() => {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
+  searchCitiesAutoComplete = () => {
+    jQuery.get("public/js/cities.txt", data => {
+      citiesArray = data.toLowerCase().split("\n");
+      cityNameInput
+        .autocomplete({
+          source: citiesArray
+        })
+        .focus(function() {
+          $(this).autocomplete("search", "");
+        });
+    });
+  };
+
+  searchStatesAutoComplete = () => {
+    jQuery.get("public/js/states.txt", data => {
+      statesArray = data.toLowerCase().split("\n");
+      stateNameInput
+        .autocomplete({
+          source: statesArray
+        })
+        .focus(function() {
+          $(this).autocomplete("search", "");
+        });
+    });
+  };
 });
 
-// $(document).ready(() => {
-//   searchAutoComplete();
-// });
-
-// function searchAutoComplete() {
-//   jQuery.get("public/js/citystates.js", data => {
-//     cityStates = data.toLowerCase().split("\n");
-//     cityNameInput
-//       .autocomplete({
-//         source: cityStates
-//       })
-//       .focus(function() {
-//         $(this).autocomplete("City", "");
-//       });
-//   });
-// };
+input.addEventListener("keyup", event => {
+  console.log("start");
+  if (event.keyCode) {
+    event.preventDefault();
+    searchCitiesAutoComplete(userInput.val().toLowerCase());
+    searchStatesAutoComplete(userInput.val().toLowerCase());
+    userInput.val("");
+    console.log("end");
+  }
+});
