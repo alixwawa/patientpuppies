@@ -47,7 +47,8 @@ $(document).ready(() => {
   }
 
   $.get("/api/user_data").then(data => {
-    $(".member-name").text(data.email);
+    console.log(data);
+    $(".member-name").text(data.firstName);
   });
 
   $.get("/api/get_pic").then(data => {
