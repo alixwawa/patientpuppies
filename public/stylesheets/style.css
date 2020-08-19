@@ -9,6 +9,7 @@ body {
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
     font-size: medium;
+    
 }
 
 h2 {
@@ -21,6 +22,7 @@ h2 {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 5px;
+        
 }
 
 .submitBtn {
@@ -31,6 +33,8 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    
+    
 }
 
 img, #picHere {
@@ -38,9 +42,19 @@ img, #picHere {
     border-radius: 50%;
     height: 175px;
     width: 175px;
+    
 }
 
 .description {
   margin-top: 110px;
 
 }
+
+#upcomingshows {
+
+    padding-left: 50px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+

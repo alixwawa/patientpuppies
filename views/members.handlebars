@@ -18,13 +18,38 @@
       <h2>Welcome <span class="member-name"></span></h2>
     </div>
 
-
     <div id="picHere" class="card">
       <img src="" id="img-preview" />
       <label class="file-upload-container" for="file-upload">
         <input id="file-upload" type="file">
         Select an Image
       </label>
+    </div>
+  </div>
+
+  <div class="stayplease" class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div id="api-div">
+        <form class="field is-grouped" id="search-form">
+          <button type="button" class="button" id="submit-btn">Artist Search</button>
+          <input class="input  is-expanded is-fullwidth" id="search-input" type="text" placeholder="Search">
+        </form>
+        <p id="upcomingshows">Upcoming Shows</p>
+      </div>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+      <div id="pastapi-div">
+        <p id="upcomingshows">Past Shows</p>
+      </div>
+    </div>
+
+    <div>
+      <form>
+        <label for="eventID">Save Event ID Here!!!:</label><br>
+        <input type="text" id="eventID" name="eventID"><br>
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
 </div>

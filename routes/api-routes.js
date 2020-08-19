@@ -40,11 +40,9 @@ module.exports = function(app) {
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
-
     req.logout();
     console.log("LOGOUT");
     res.redirect("/");
-
   });
 
   // Route for getting some data about our user to be used client side
@@ -56,15 +54,13 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      console.log(res);
+
       res.json({
         firstName: req.user.firstName,
         id: req.user.id
       });
     }
   });
-
-
 
   app.put("/api/user_pic", (req, res) => {
     // if (!req.user) {
@@ -92,7 +88,7 @@ module.exports = function(app) {
   app.get("/api/get_pic", (req, res) => {
     if (!req.user) {
       // console.log(req.user);
-      
+
       res.end();
       //   // console.log("im here");
       //   //   // The user is not logged in, send back an empty object
@@ -113,9 +109,9 @@ module.exports = function(app) {
       ).then(picURL => {
         // this works below
         // console.log(res.dataValues.picURL);
-        
+
         // return res.dataValues.picURL;
-        res.json(picURL.dataValues.picURL)
+        res.json(picURL.dataValues.picURL);
       });
     }
   });
