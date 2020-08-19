@@ -5,17 +5,13 @@ form.login {
 
 
 body {
-    background-image: url("https://i.pinimg.com/564x/04/1e/56/041e568ee34b82e501f532d972dcbcff.jpg");
-    color: whitesmoke;
+    background-color: whitesmoke;
+    color: #36454f;
     font-family: 'Advent Pro', sans-serif;
-    background-size: cover;
-    /* Resize the background image to cover the entire container */
-    background-repeat: no-repeat;
-    /* Do not repeat the image */
 }
 
 h2 {
-    color: whitesmoke;
+    color: #36454f;
     font-family: 'Advent Pro', sans-serif;
 }
 
@@ -37,7 +33,7 @@ h2 {
 }
 
 img {
-    height: 250px;
-    width: 250px;
-    border: 4px solid black;
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
 }
