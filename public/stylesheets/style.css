@@ -8,6 +8,7 @@ body {
     background-color: whitesmoke;
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
+    font-size: medium;
 }
 
 h2 {
@@ -33,7 +34,13 @@ h2 {
 }
 
 img {
+    margin-left: 20px;
     border-radius: 50%;
     height: 175px;
     width: 175px;
+}
+
+.description {
+  margin-top: 110px;
+
 }
