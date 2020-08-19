@@ -82,20 +82,7 @@ $(document).ready(() => {
     $("#alert").fadeIn(500);
   }
 
-  searchCitiesAutoComplete = () => {
-    jQuery.get("public/js/cities.txt", data => {
-      console.log("hi");
-      citiesArray = data.toLowerCase().split("\n");
-      userInput
-        .autocomplete({
-          source: citiesArray
-        })
-        .focus(function() {
-          $(this).autocomplete("search", "");
-        });
-    });
-  };
-
+  
   // searchStatesAutoComplete = () => {
   //   jQuery.get("public/js/states.txt", data => {
   //     statesArray = data.toLowerCase().split("\n");
@@ -125,3 +112,22 @@ $(document).ready(() => {
 //   }
 // });
 });
+
+
+// let example = ["one", "two"]
+// searchCitiesAutoComplete = () => {
+//   console.log("one");
+//   jQuery.get("public/js/cities.txt", data => {
+//     console.log("two");
+//     citiesArray = data.toLowerCase().split("\n");
+//     userInput
+//       .autocomplete({
+//         source: citiesArray
+//       })
+//       .focus(function() {
+//         $(this).autocomplete("search", "");
+//       });
+//   });
+// };
+
+// searchCitiesAutoComplete();
