@@ -37,7 +37,6 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
-
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();
@@ -113,6 +112,29 @@ module.exports = function(app) {
         // return res.dataValues.picURL;
         res.json(picURL.dataValues.picURL);
       });
+    }
+  });
+  app.post("/members/sendShowId", (req, res) => {
+    if (req.user) {
+      // console.log(res);
+      const insertOldShow = {
+        oldShowID: req.body.oldshowID,
+        UserId: req.user.id
+      };
+      console.log(insertOldShow);
+      // console.log(req.user.id);
+      db.Oldshows.create(insertOldShow)
+        .then(dbShows => {
+          console.log("thanks");
+          res.json(dbShows);
+          // res.redirect(307, "/members");
+        })
+        .catch(err => {
+          console.log("hi");
+          res.status(401).json(err);
+        });
+    } else {
+      console.log('not user')
     }
   });
 };

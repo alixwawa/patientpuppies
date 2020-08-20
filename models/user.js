@@ -43,12 +43,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   });
-
-  // const oldShows = sequelize.define("oldShows", {
-  //   oldShows: {
-  //     type: DataTypes.INTEGER,
-  //     allowNull: false            
-  // }
+  User.associate = models => {
+    // console.log(models);
+    User.hasMany(models.Oldshows, {
+      onDelete: "cascade"
+    });
+  };
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);

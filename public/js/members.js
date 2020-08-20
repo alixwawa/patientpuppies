@@ -1,7 +1,8 @@
 // let artistName =
 $(document).ready(() => {
   const userInput = $("#search-input");
-  const CLOUDINARY_UPLOAD_PRESET = 'nlenhpww';
+  const pastedShowID = $("#save-input");
+  const CLOUDINARY_UPLOAD_PRESET = "nlenhpww";
   const fileUpload = $("input#file-upload");
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
@@ -10,9 +11,9 @@ $(document).ready(() => {
     event.preventDefault();
     const file = event.target.files[0];
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-    console.log("hi");
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    // console.log("hi");
 
     sendPic(formData);
   });
@@ -26,7 +27,7 @@ $(document).ready(() => {
       contentType: false
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         $.ajax({
           type: "PUT",
           url: "/api/user_pic",
@@ -65,21 +66,20 @@ $(document).ready(() => {
     // if (artist!==artist) {
     // bioDiv.empty();
 
-    console.log(artist)
+    console.log(artist);
     $.ajax({
       url:
-        "https://api.songkick.com/api/3.0/search/artists.json?apikey=pE1BwpmMDHJdfs9n&query=" + artist,
+        "https://api.songkick.com/api/3.0/search/artists.json?apikey=pE1BwpmMDHJdfs9n&query=" +
+        artist,
       method: "GET"
     }).then(response => {
-      let artistID = response.resultsPage.results.artist[0].id;
-
-
-
-
+      const artistID = response.resultsPage.results.artist[0].id;
       //api for upcomming shows
       $.ajax({
         url:
-          "https://api.songkick.com/api/3.0/artists/" + artistID + "/calendar.json?apikey=pE1BwpmMDHJdfs9n",
+          "https://api.songkick.com/api/3.0/artists/" +
+          artistID +
+          "/calendar.json?apikey=pE1BwpmMDHJdfs9n",
         method: "GET"
       }).then(response => {
         const songKickRes = response.resultsPage.results.event;
@@ -90,17 +90,32 @@ $(document).ready(() => {
             // console.log(data.start.date);
             // console.log(data.type);
             // $(".displayName").text(`Venue: ${data.venue.displayName}`);
-            const displayName = data.venue.displayName
-            const location = data.location.city
-            const when = data.start.date
-            const showType = data.type
+            const displayName = data.venue.displayName;
+            const location = data.location.city;
+            const when = data.start.date;
+            const showType = data.type;
             const apiDiv = $("#api-div");
-            const eventList = $("<ul>").css("list-style-type", "disc").css("list-style-position", "inside").css("margin-left", "10px");
-            const listdisplayName = $("<li>").html("<span class='clearLater'>Venue: </span>" + displayName);
-            const listlocation = $("<li>").html("<span class='clearLater'>Location: </span>" + location);
-            const listwhen = $("<li>").html("<span class='clearLater'>When: </span>" + when);
-            const listshowType = $("<li>").html("<span class='clearLater'>Event Type: </span>" + showType);
-            eventList.append(listdisplayName).append(listlocation).append(listwhen).append(listshowType)
+            const eventList = $("<ul>")
+              .css("list-style-type", "disc")
+              .css("list-style-position", "inside")
+              .css("margin-left", "10px");
+            const listdisplayName = $("<li>").html(
+              "<span class='clearLater'>Venue: </span>" + displayName
+            );
+            const listlocation = $("<li>").html(
+              "<span class='clearLater'>Location: </span>" + location
+            );
+            const listwhen = $("<li>").html(
+              "<span class='clearLater'>When: </span>" + when
+            );
+            const listshowType = $("<li>").html(
+              "<span class='clearLater'>Event Type: </span>" + showType
+            );
+            eventList
+              .append(listdisplayName)
+              .append(listlocation)
+              .append(listwhen)
+              .append(listshowType);
             // apiDiv.empty();
             apiDiv.append(eventList);
           } else {
@@ -114,7 +129,9 @@ $(document).ready(() => {
       //api for past shows
       $.ajax({
         url:
-          "https://api.songkick.com/api/3.0/artists/" + artistID + "/gigography.json?apikey=pE1BwpmMDHJdfs9n",
+          "https://api.songkick.com/api/3.0/artists/" +
+          artistID +
+          "/gigography.json?apikey=pE1BwpmMDHJdfs9n",
         method: "GET"
       }).then(response => {
         const songKickRes = response.resultsPage.results.event;
@@ -126,20 +143,38 @@ $(document).ready(() => {
             // console.log(data.type);
             // $(".displayName").text(`Venue: ${data.venue.displayName}`);
             // console.log(data.id);
-            const displayName = data.venue.displayName
-            const location = data.location.city
-            const when = data.start.date
-            const showType = data.type
-            const showID = data.id
+            const displayName = data.venue.displayName;
+            const location = data.location.city;
+            const when = data.start.date;
+            const showType = data.type;
+            const showID = data.id;
             const apiDivTwo = $("#pastapi-div");
-            const eventList = $("<ul>").css("list-style-type", "disc").css("list-style-position", "inside").css("margin-left", "10px");
-            const listdisplayName = $("<li>").html("<span class='clearLater'>Venue: </span>" + displayName);
-            const listlocation = $("<li>").html("<span class='clearLater'>Location: </span>" + location);
-            const listwhen = $("<li>").html("<span class='clearLater'>When: </span>" + when);
-            const listshowType = $("<li>").html("<span class='clearLater'>Event Type: </span>" + showType);
-            const addshowID = $("<li>").html("<span class='clearLater'>Event ID: </span>" + showID);
+            const eventList = $("<ul>")
+              .css("list-style-type", "disc")
+              .css("list-style-position", "inside")
+              .css("margin-left", "10px");
+            const listdisplayName = $("<li>").html(
+              "<span class='clearLater'>Venue: </span>" + displayName
+            );
+            const listlocation = $("<li>").html(
+              "<span class='clearLater'>Location: </span>" + location
+            );
+            const listwhen = $("<li>").html(
+              "<span class='clearLater'>When: </span>" + when
+            );
+            const listshowType = $("<li>").html(
+              "<span class='clearLater'>Event Type: </span>" + showType
+            );
+            const addshowID = $("<li>").html(
+              "<span class='clearLater'>Copy Event ID Here: </span>" + showID
+            );
             // const addButton = $(`<button type='button' class='button' id='submitbtntwo'>`).html(`<option value=${showID} class='clearLater'>Add To Your History?: </span>`);
-            eventList.append(listdisplayName).append(listlocation).append(listwhen).append(listshowType).append(addshowID)
+            eventList
+              .append(listdisplayName)
+              .append(listlocation)
+              .append(listwhen)
+              .append(listshowType)
+              .append(addshowID);
             // apiDivTwo.empty();
             apiDivTwo.append(eventList);
           } else {
@@ -150,24 +185,35 @@ $(document).ready(() => {
         });
       });
     });
-    // } else {
-    //   console.log("cant search same artist twice")
-    // }
-  }
-
-
+  };
   $("#submit-btn").on("click", () => {
-    $('ul').remove();
-    $('li').remove();
+    $("ul").remove();
+    $("li").remove();
     findArtistInfo(userInput.val().toLowerCase());
-    userInput.val('');
+    userInput.val("");
   });
 
-  // $("#submitbtntwo").on("click", () => {
-  //   console.log('yo');
-  //   // findArtistInfo(userInput.val().toLowerCase());
-  //   // userInput.val('');
-  // });
+  sendPastShowID = showID => {
+    // console.log(showID);
+    $.ajax({
+      type: "POST",
+      url: "/members/sendShowId",
+      data: {
+        oldshowID: showID
+      }
+    }).then(res => {
+        console.log(res);
+        
+        console.log("res");
+    });
+  };
+
+  $("#save-btn").on("click", () => {
+    // console.log(pastedShowID.val());
+    sendPastShowID(pastedShowID.val());
+    pastedShowID.val("");
+    // userInput.val('');
+  });
 });
 // input.addEventListener("keydown", function (event){
 //   if (event.keyCode === 13) {
