@@ -37,6 +37,22 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
+  app.put("/api/sendshowid", (req, res) => {
+    console.log('here');
+    db.oldShows
+      .update({
+        where: {
+          oldShowID: req.body.oldShowID
+        }
+      })
+      .then(() => {
+        console.log('thanks')
+        // res.redirect(307, "/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
