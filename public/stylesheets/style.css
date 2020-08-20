@@ -9,11 +9,13 @@ body {
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
     font-size: medium;
+    letter-spacing: 1.5px;
 }
 
 h2 {
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
+    letter-spacing: 1.5px;
 }
 
 .searchBar {
@@ -42,5 +44,4 @@ img {
 
 .description {
   margin-top: 110px;
-
 }
