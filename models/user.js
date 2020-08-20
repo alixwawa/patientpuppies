@@ -44,7 +44,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   User.associate = models => {
-    User.hasMany(models.pastShows, {
+    // console.log(models);
+    User.hasMany(models.Oldshows, {
       onDelete: "cascade"
     });
   };

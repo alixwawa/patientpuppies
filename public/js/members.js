@@ -13,7 +13,7 @@ $(document).ready(() => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-    console.log("hi");
+    // console.log("hi");
 
     sendPic(formData);
   });
@@ -27,7 +27,7 @@ $(document).ready(() => {
       contentType: false
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         $.ajax({
           type: "PUT",
           url: "/api/user_pic",
@@ -193,33 +193,24 @@ $(document).ready(() => {
     userInput.val("");
   });
 
-  function sendPastShowID(showID) {
+  sendPastShowID = showID => {
     // console.log(showID);
     $.ajax({
-      type: "PUT",
-      url: "/api/sendshowid",
+      type: "POST",
+      url: "/members/sendShowId",
       data: {
-        oldShowID: showID
+        oldshowID: showID
       }
-      // processData: false,
-      // contentType: false
-    })
-      .then(res => {
+    }).then(res => {
         console.log(res);
+        
         console.log("res");
-      })
-
-      // If there's an error, log the error
-
-      .catch(err => {
-        console.log(err);
-        console.log('err');
-      });
-  }
+    });
+  };
 
   $("#save-btn").on("click", () => {
-    console.log(pastedShowID.val());
-    sendPastShowID(pastedShowID.val().toLowerCase());
+    // console.log(pastedShowID.val());
+    sendPastShowID(pastedShowID.val());
     pastedShowID.val("");
     // userInput.val('');
   });

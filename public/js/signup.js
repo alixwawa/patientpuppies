@@ -112,8 +112,6 @@ $(document).ready(() => {
 //   }
 // });
 });
-
-
 // let example = ["one", "two"]
 // searchCitiesAutoComplete = () => {
 //   console.log("one");
