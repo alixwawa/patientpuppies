@@ -4,8 +4,8 @@ form.login {
 }
 
 body {
-    background-color: whitesmoke;
-    color: #36454f;
+    background-color: #99b3ff;
+    color: #ffffff;
     font-family: 'Advent Pro', sans-serif;
     font-size: medium;
     
@@ -20,11 +20,12 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 5px;        
+    margin-top: 5px;  
+    color: black;      
 }
 
 .submitBtn {
-    color: #36454f;
+    color: black;
 }
 
 .navbar-header {
@@ -48,4 +49,10 @@ img {
     font-weight: bold;
 }
 
+.input {
+    color: black;
+}
 
+.button {
+    color: black;
+}
