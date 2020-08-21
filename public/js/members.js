@@ -201,11 +201,15 @@ $(document).ready(() => {
       data: {
         oldshowID: showID
       }
-    }).then(res => {
-        console.log(res);
-        
+    })
+      .then(res => {
+        // console.log(res);
         console.log("res");
-    });
+      })
+      .catch(err => {
+        alert("can't save same ID twice");
+        console.log(err);
+      });
   };
 
   $("#save-btn").on("click", () => {
@@ -214,6 +218,16 @@ $(document).ready(() => {
     pastedShowID.val("");
     // userInput.val('');
   });
+
+  gettingSetting = () => {
+    $.get("/members/getshowid")
+    .then(data => {
+      console.log("weinhere");
+      data.forEach(blah => console.log(blah.oldShowID));
+    });
+  };
+
+  gettingSetting();
 });
 // input.addEventListener("keydown", function (event){
 //   if (event.keyCode === 13) {
