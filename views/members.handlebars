@@ -23,11 +23,16 @@
 <div class="container">
   <div class="row">
     <div id="picHere" class="card col-md-4">
-      <img src="" id="img-preview" />
+      <img src="" id="img-preview"/>
       <label class="file-upload-container" for="file-upload">
         <input id="file-upload" type="file">
         Select an Image
       </label>
+      <div class="col-md-12" id="aboutMe">
+        <label id="aboutMeLabel">Tell the world about yourself:</label>
+        <textarea id="aboutMeInput" rows="3"></textarea>
+        <button type="button" class="button" id="aboutMeBtn">Create About Me</button>
+      </div>
     </div>
     <div id="api-div" class="col-md-4">
       <form class="field is-grouped" id="search-form">
@@ -41,21 +46,11 @@
     </div>
     <div class="col-md-4">
       <form>
-        
         <button type="button" class="button" id="save-btn">Save</button>
-        <input class="input  is-expanded is-fullwidth" id="save-input" type="text" placeholder="Paste Event ID Here"><br>
+        <input class="input  is-expanded is-fullwidth" id="save-input" type="text"
+          placeholder="Paste Event ID Here"><br>
         <label for="eventID"></label><br>
       </form>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <label>Tell the world about yourself:</label>
-      <textarea rows="3"></textarea>
-      <button type="button" class="button" id="aboutMeBtn">Update About Me</button>
     </div>
   </div>
 </div>

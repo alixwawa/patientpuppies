@@ -61,6 +61,7 @@ module.exports = function(app) {
     }
   });
 
+  // here for examp
   app.put("/api/user_pic", (req, res) => {
     // if (!req.user) {
 
@@ -91,7 +92,6 @@ module.exports = function(app) {
       res.end();
       //   // console.log("im here");
       //   //   // The user is not logged in, send back an empty object
-      res.json({});
     } else {
       //   //   // Otherwise send back the user's email and id
       //   //   // Sending back a password, even a hashed password, isn't a good idea
@@ -136,27 +136,65 @@ module.exports = function(app) {
       console.log('not user')
     }
   });
+  
+  app.put("/members/aboutMe", (req, res) => {
+    // if (!req.user) {
+
+    res.end();
+
+    //   // The user is not logged in, send back an empty object
+    //   res.json({});
+    // } else {
+    //   // Otherwise send back the user's email and id
+    //   // Sending back a password, even a hashed password, isn't a good idea
+    console.log(req.body);
+    db.User.update(
+      {
+        aboutMe: req.body.aboutMe
+      },
+      {
+        where: {
+          email: req.user.email
+        }
+      }
+    );
+  });
+
   app.get("/members/getshowid", async (req, res) => {
     if (!req.user) {
       // console.log(req.user);
+      const oldSHows = await db.Oldshows.findAll({
+        where: {
+          UserId: req.user.id
+        }
+      });
+
+      res.json(oldSHows);
+    }
+  });
+
+  app.get("/members/getAboutMe", async (req, res) => {
+    if (!req.user) {
+      // console.log(req.user);
+
       res.end();
       //   // console.log("im here");
       //   //   // The user is not logged in, send back an empty object
     } else {
       //   //   // Otherwise send back the user's email and id
       //   //   // Sending back a password, even a hashed password, isn't a good idea
-      const oldSHows = await db.Oldshows.findAll(
+
+      const getAboutMe = await db.User.findOne(
         // {
         //   picURL: req.user.picURL
         // },
         {
           where: {
-            UserId: req.user.id
+            id: req.user.id
           }
         }
       );
-
-      res.json(oldSHows);
+      res.json(getAboutMe);
     }
   });
 };
