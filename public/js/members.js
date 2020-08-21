@@ -2,6 +2,7 @@
 $(document).ready(() => {
   const userInput = $("#search-input");
   const pastedShowID = $("#save-input");
+  const deleteInputField = $("#delete-input");
   const CLOUDINARY_UPLOAD_PRESET = "nlenhpww";
   const fileUpload = $("input#file-upload");
   const aboutMeInput = $("#aboutMeInput");
@@ -96,20 +97,20 @@ $(document).ready(() => {
             const when = data.start.date;
             const showType = data.type;
             const apiDiv = $("#api-div");
-            const eventList = $("<ul>")
+            const eventList = $("<ul class='iwantgonenow'>")
               .css("list-style-type", "disc")
               .css("list-style-position", "inside")
               .css("margin-left", "10px");
-            const listdisplayName = $("<li>").html(
+            const listdisplayName = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Venue: </span>" + displayName
             );
-            const listlocation = $("<li>").html(
+            const listlocation = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Location: </span>" + location
             );
-            const listwhen = $("<li>").html(
+            const listwhen = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>When: </span>" + when
             );
-            const listshowType = $("<li>").html(
+            const listshowType = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Event Type: </span>" + showType
             );
             eventList
@@ -150,23 +151,23 @@ $(document).ready(() => {
             const showType = data.type;
             const showID = data.id;
             const apiDivTwo = $("#pastapi-div");
-            const eventList = $("<ul>")
+            const eventList = $("<ul class='iwantgonenow'>")
               .css("list-style-type", "disc")
               .css("list-style-position", "inside")
               .css("margin-left", "10px");
-            const listdisplayName = $("<li>").html(
+            const listdisplayName = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Venue: </span>" + displayName
             );
-            const listlocation = $("<li>").html(
+            const listlocation = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Location: </span>" + location
             );
-            const listwhen = $("<li>").html(
+            const listwhen = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>When: </span>" + when
             );
-            const listshowType = $("<li>").html(
+            const listshowType = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Event Type: </span>" + showType
             );
-            const addshowID = $("<li>").html(
+            const addshowID = $("<li class='iwantgonenow'>").html(
               "<span class='clearLater'>Copy Event ID Here: </span>" + showID
             );
             // const addButton = $(`<button type='button' class='button' id='submitbtntwo'>`).html(`<option value=${showID} class='clearLater'>Add To Your History?: </span>`);
@@ -188,8 +189,8 @@ $(document).ready(() => {
     });
   };
   $("#submit-btn").on("click", () => {
-    $("ul").remove();
-    $("li").remove();
+    $(".iwantgonenow").remove();
+    // $("#iwantgonenow").remove();
     findArtistInfo(userInput.val().toLowerCase());
     userInput.val("");
   });
@@ -218,48 +219,114 @@ $(document).ready(() => {
     sendPastShowID(pastedShowID.val());
     pastedShowID.val("");
     // userInput.val('');
+    location.reload();
   });
 
   gettingSetting = () => {
-    $.get("/members/getshowid")
-    .then(data => {
-      console.log(data);
-      data.forEach(blah => console.log(blah.oldShowID));
+    $.get("/members/getshowid").then(data => {
+      // console.log(data);
+      data.forEach(blah => {
+        // console.log(blah.oldShowID);
+        const saveoldshowids = blah.oldShowID;
+        $.ajax({
+          url: `https://api.songkick.com/api/3.0/events/${saveoldshowids}.json?apikey=pE1BwpmMDHJdfs9n`,
+          method: "GET"
+        }).then(moreblah => {
+          const beentoresults = moreblah.resultsPage.results.event;
+          const displayName = beentoresults.venue.displayName;
+          const location = beentoresults.location.city;
+          const when = beentoresults.start.date;
+          const showType = beentoresults.type;
+          const showID = beentoresults.id;
+          const apiDiv = $("#saveapi-div");
+          const eventList = $("<ul>")
+            .css("list-style-type", "disc")
+            .css("list-style-position", "inside")
+            .css("margin-left", "10px");
+          const listdisplayName = $("<li>").html(
+            "<span class='clearLater'>Venue: </span>" + displayName
+          );
+          const listlocation = $("<li>").html(
+            "<span class='clearLater'>Location: </span>" + location
+          );
+          const listwhen = $("<li>").html(
+            "<span class='clearLater'>When: </span>" + when
+          );
+          const listshowType = $("<li>").html(
+            "<span class='clearLater'>Event Type: </span>" + showType
+          );
+         const deleteButtons = $(`<li type="button" class="button" id="deleteButton">Show ID: ${showID} </li>`);
+          eventList
+            .append(listdisplayName)
+            .append(listlocation)
+            .append(listwhen)
+            .append(listshowType)
+            .append(deleteButtons);
+          // apiDiv.empty();
+          apiDiv.append(eventList);
+          location.reload();
+        });
+      });
     });
   };
 
   gettingSetting();
 
-  sendAboutMe = aboutMeInput => {
+  sendAboutMe = newdata => {
+    console.log(newdata);
     $.ajax({
       type: "PUT",
       url: "/members/aboutMe",
       data: {
-        aboutMe: aboutMeInput
+        aboutMe: newdata
       }
     });
   };
-
-  $("#aboutMeBtn").on("click", () => {
-    console.log("whateveryouwant");
-    sendAboutMe(aboutMeInput.val().toLowerCase());
+//had to use document.on here because apparently the button was being rendered by ajax???
+  $(document).on("click", "#aboutMeBtn", () => {
+    console.log("pleasework");
+    // sendAboutMe(aboutMeInput.val());
+    sendAboutMe(document.getElementById("aboutMeInput").value);
     aboutMeInput.val("");
     location.reload();
   });
 
   $.get("/members/getAboutMe").then(data => {
     console.log(data.aboutMe);
-    // if (data !== "") {
-      // $("#aboutMeLabel").remove();
-      // $("#aboutMeInput").remove();
-      // $("#aboutMeBtn").remove();
-      // $("#aboutMe").append(`<h1 id=#willerasemaybe> ${data.aboutMe} </h1>`).append('<button id="secondbutton">Update About Me</button>');
-    // }
+    if (data.aboutMe === " " || data.aboutMe === "" || !data.aboutMe) {
+      console.log("need info");
+    } else {
+      $("#aboutMeLabel").remove();
+      $("#aboutMeInput").remove();
+      $("#aboutMeBtn").remove();
+      $("#aboutMe").append(`<textarea style="resize:none;" id="willerasemaybe"> ${data.aboutMe} </textarea>`).append("<br>").append('<button id="secondbutton">Update About Me</button>');
+    }
   });
-  
-  // $("#secondbutton").on("click", () => {
-  //   $('#willerasemaybe').remove();
-    // the button on line 242. If it's clicked, remove h1 field with text and then append 
+
+  $(document).on("click", "#secondbutton", () => {
+    $("#willerasemaybe").remove();
+    $("#secondbutton").remove();
+    $("#aboutMe").append("<textarea id='aboutMeInput' placeholder='Update Here:'></textarea>").append("<br>").
+      append("<button type='button' class='button' id='aboutMeBtn'>Create About Me</button>");
+    // the button on line 242. If it's clicked, remove h1 field with text and then append
     // an input field. Use the same ID that we used to grab the info the first time (aboutMeInput)
-  // }); 
+  });
+  sendPastShowID = deletedid => {
+    console.log(deletedid);
+    $.ajax({
+      type: "DELETE",
+      url: "/deletememory",
+      data: {
+        oldShowID: deletedid
+      }
+    });
+  };
+
+  $(document).on("click", "#dell-btn", () => {
+    console.log('delete');
+    sendPastShowID(deleteInputField.val());
+    deleteInputField.val("");
+    // userInput.val('');
+    location.reload();
+  });
 });

@@ -138,13 +138,13 @@ module.exports = function(app) {
   });
   
   app.put("/members/aboutMe", (req, res) => {
-    // if (!req.user) {
+    if (!req.user) {
 
     res.end();
 
     //   // The user is not logged in, send back an empty object
     //   res.json({});
-    // } else {
+    } else {
     //   // Otherwise send back the user's email and id
     //   // Sending back a password, even a hashed password, isn't a good idea
     console.log(req.body);
@@ -154,11 +154,13 @@ module.exports = function(app) {
       },
       {
         where: {
-          email: req.user.email
+          id: req.user.id
         }
       }
-    );
+    )
+    }
   });
+  
 
   app.get("/members/getshowid", async (req, res) => {
     if (!req.user) {
@@ -197,6 +199,19 @@ module.exports = function(app) {
         }
       );
       res.json(getAboutMe);
+    }
+  });
+
+  app.delete("/deletememory", (req, res) => {
+    if (!req.user) {
+      res.end();
+    } else {
+      console.log(req.body.oldShowID);
+      db.Oldshows.destroy({
+        where: {
+          oldShowID: req.body.oldShowID
+        }
+      });
     }
   });
 };
