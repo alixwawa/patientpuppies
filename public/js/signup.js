@@ -68,7 +68,7 @@ $(document).ready(() => {
       firstName: firstName,
       lastName: lastName,
       cityName: cityName,
-      stateName: stateName,
+      stateName: stateName
     })
       .then(() => {
         window.location.replace("/members");
@@ -112,8 +112,6 @@ $(document).ready(() => {
 //   }
 // });
 });
-
-
 // let example = ["one", "two"]
 // searchCitiesAutoComplete = () => {
 //   console.log("one");

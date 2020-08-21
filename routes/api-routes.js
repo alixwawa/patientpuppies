@@ -37,14 +37,11 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
-
   // Route for logging user out
   app.get("/logout", (req, res) => {
-
     req.logout();
     console.log("LOGOUT");
     res.redirect("/");
-
   });
 
   // Route for getting some data about our user to be used client side
@@ -56,15 +53,15 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
+
       res.json({
-        email: req.user.email,
+        firstName: req.user.firstName,
         id: req.user.id
       });
     }
   });
 
-
-
+  // here for examp
   app.put("/api/user_pic", (req, res) => {
     // if (!req.user) {
 
@@ -91,7 +88,7 @@ module.exports = function(app) {
   app.get("/api/get_pic", (req, res) => {
     if (!req.user) {
       // console.log(req.user);
-      
+
       res.end();
       //   // console.log("im here");
       //   //   // The user is not logged in, send back an empty object
@@ -112,10 +109,82 @@ module.exports = function(app) {
       ).then(picURL => {
         // this works below
         // console.log(res.dataValues.picURL);
-        
+
         // return res.dataValues.picURL;
-        res.json(picURL.dataValues.picURL)
+        res.json(picURL.dataValues.picURL);
       });
     }
   });
+  app.post("/members/sendShowId", (req, res) => {
+    if (req.user) {
+      // console.log(res);
+      const insertOldShow = {
+        oldShowID: req.body.oldshowID,
+        UserId: req.user.id
+      };
+      console.log(insertOldShow);
+      // console.log(req.user.id);
+      db.Oldshows.create(insertOldShow)
+        .then(dbShows => {
+          console.log("thanks");
+          res.json(dbShows);
+          // res.redirect(307, "/members");
+        })
+        .catch(err => {
+          console.log("hi");
+          res.status(401).json(err);
+        });
+    } else {
+      console.log('not user')
+    }
+  });
+
+  app.put("/members/aboutMe", (req, res) => {
+    // if (!req.user) {
+
+    res.end();
+
+    //   // The user is not logged in, send back an empty object
+    //   res.json({});
+    // } else {
+    //   // Otherwise send back the user's email and id
+    //   // Sending back a password, even a hashed password, isn't a good idea
+    console.log(req.body);
+    db.User.update(
+      {
+        aboutMe: req.body.aboutMe
+      },
+      {
+        where: {
+          email: req.user.email
+        }
+      }
+    );
+  });
+
+  app.get("/members/getAboutMe", async (req, res) => {
+    if (!req.user) {
+      // console.log(req.user);
+
+      res.end();
+      //   // console.log("im here");
+      //   //   // The user is not logged in, send back an empty object
+    } else {
+      //   //   // Otherwise send back the user's email and id
+      //   //   // Sending back a password, even a hashed password, isn't a good idea
+
+      const getAboutMe = await db.User.findOne(
+        // {
+        //   picURL: req.user.picURL
+        // },
+        {
+          where: {
+            id: req.user.id
+          }
+        }
+      );
+      res.json(getAboutMe);
+    }
+  });
+
 };

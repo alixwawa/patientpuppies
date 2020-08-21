@@ -7,6 +7,8 @@ body {
     background-color: whitesmoke;
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
+    font-size: medium;
+    
 }
 
 h2 {
@@ -18,7 +20,7 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 5px;
+    margin-top: 5px;        
 }
 
 .submitBtn {
@@ -28,7 +30,7 @@ h2 {
 .navbar-header {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-start;  
 }
 
 img {
@@ -36,3 +38,14 @@ img {
     height: 175px;
     width: 175px;
 }
+
+.description {
+  margin-top: 110px;
+}
+
+#upcomingshows {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
