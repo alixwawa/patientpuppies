@@ -41,6 +41,11 @@ module.exports = function(sequelize, DataTypes) {
     picURL: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    
+    aboutMe: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   });
   User.associate = models => {

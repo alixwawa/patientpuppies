@@ -4,10 +4,11 @@ $(document).ready(() => {
   const pastedShowID = $("#save-input");
   const CLOUDINARY_UPLOAD_PRESET = "nlenhpww";
   const fileUpload = $("input#file-upload");
+  const aboutMeInput = $("#aboutMeInput");
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
   // document.cookie = "cookie2=value2; SameSite=None; Secure";
-  fileUpload.on("change", event => {
+  fileUpload.on("change", (event) => {
     event.preventDefault();
     const file = event.target.files[0];
     const formData = new FormData();
@@ -24,16 +25,16 @@ $(document).ready(() => {
       url: "https://api.cloudinary.com/v1_1/dys3x6xgt/upload",
       data: picture,
       processData: false,
-      contentType: false
+      contentType: false,
     })
-      .then(res => {
+      .then((res) => {
         // console.log(res);
         $.ajax({
           type: "PUT",
           url: "/api/user_pic",
           data: {
-            picURL: res.url
-          }
+            picURL: res.url,
+          },
           // processData: false,
           // contentType: false
         });
@@ -42,17 +43,17 @@ $(document).ready(() => {
 
       // If there's an error, log the error
 
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  $.get("/api/user_data").then(data => {
+  $.get("/api/user_data").then((data) => {
     // console.log(data);
     $(".member-name").text(data.firstName);
   });
 
-  $.get("/api/get_pic").then(data => {
+  $.get("/api/get_pic").then((data) => {
     if (data) {
       $("#picHere").html(`<img src="${data}" />`);
     } else {
@@ -62,7 +63,7 @@ $(document).ready(() => {
     }
   });
 
-  findArtistInfo = artist => {
+  findArtistInfo = (artist) => {
     // if (artist!==artist) {
     // bioDiv.empty();
 
@@ -71,8 +72,8 @@ $(document).ready(() => {
       url:
         "https://api.songkick.com/api/3.0/search/artists.json?apikey=pE1BwpmMDHJdfs9n&query=" +
         artist,
-      method: "GET"
-    }).then(response => {
+      method: "GET",
+    }).then((response) => {
       const artistID = response.resultsPage.results.artist[0].id;
       //api for upcomming shows
       $.ajax({
@@ -80,10 +81,10 @@ $(document).ready(() => {
           "https://api.songkick.com/api/3.0/artists/" +
           artistID +
           "/calendar.json?apikey=pE1BwpmMDHJdfs9n",
-        method: "GET"
-      }).then(response => {
+        method: "GET",
+      }).then((response) => {
         const songKickRes = response.resultsPage.results.event;
-        songKickRes.forEach(data => {
+        songKickRes.forEach((data) => {
           if (data) {
             // console.log(data.venue.displayName);
             // console.log(data.location.city);
@@ -132,10 +133,10 @@ $(document).ready(() => {
           "https://api.songkick.com/api/3.0/artists/" +
           artistID +
           "/gigography.json?apikey=pE1BwpmMDHJdfs9n",
-        method: "GET"
-      }).then(response => {
+        method: "GET",
+      }).then((response) => {
         const songKickRes = response.resultsPage.results.event;
-        songKickRes.forEach(data => {
+        songKickRes.forEach((data) => {
           if (data) {
             // console.log(data.venue.displayName);
             // console.log(data.location.city);
@@ -193,18 +194,18 @@ $(document).ready(() => {
     userInput.val("");
   });
 
-  sendPastShowID = showID => {
+  sendPastShowID = (showID) => {
     // console.log(showID);
     $.ajax({
       type: "POST",
       url: "/members/sendShowId",
       data: {
-        oldshowID: showID
-      }
-    }).then(res => {
-        console.log(res);
-        
-        console.log("res");
+        oldshowID: showID,
+      },
+    }).then((res) => {
+      console.log(res);
+
+      console.log("res");
     });
   };
 
@@ -214,11 +215,37 @@ $(document).ready(() => {
     pastedShowID.val("");
     // userInput.val('');
   });
+
+  sendAboutMe = (aboutMeInput) => {
+    $.ajax({
+      type: "PUT",
+      url: "/members/aboutMe",
+      data: {
+        aboutMe: aboutMeInput,
+      },
+    });
+  };
+
+  $("#aboutMeBtn").on("click", () => {
+    console.log("whateveryouwant");
+    sendAboutMe(aboutMeInput.val().toLowerCase());
+    aboutMeInput.val("");
+    location.reload();
+  });
+
+  $.get("/members/getAboutMe").then(data => {
+    console.log(data.aboutMe);
+    if (data !== " " && data !== "") {
+      $("#aboutMeLabel").remove();
+      $("#aboutMeInput").remove(); 
+      $("#aboutMeBtn").remove();
+      $("#aboutMe").append(`<h1 id=#willerasemaybe> ${data.aboutMe} </h1>`).append('<button id="secondbutton">Update About Me</button>');
+    }
+  });
+  
+  $("#secondbutton").on("click", () => {
+    $('#willerasemaybe').remove();
+    // the button on line 242. If it's clicked, remove h1 field with text and then append 
+    // an input field. Use the same ID that we used to grab the info the first time (aboutMeInput)
+  }); 
 });
-// input.addEventListener("keydown", function (event){
-//   if (event.keyCode === 13) {
-//   event.preventDefault();
-//   displayHeroInfo(userInput.val().toLowerCase());
-//   userInput.val('');
-// };
-// });
