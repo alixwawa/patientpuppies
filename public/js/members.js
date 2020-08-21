@@ -249,12 +249,12 @@ $(document).ready(() => {
 
   $.get("/members/getAboutMe").then(data => {
     console.log(data.aboutMe);
-    if (data !== "") {
+    // if (data !== "") {
       // $("#aboutMeLabel").remove();
       // $("#aboutMeInput").remove();
       // $("#aboutMeBtn").remove();
       // $("#aboutMe").append(`<h1 id=#willerasemaybe> ${data.aboutMe} </h1>`).append('<button id="secondbutton">Update About Me</button>');
-    }
+    // }
   });
   
   // $("#secondbutton").on("click", () => {

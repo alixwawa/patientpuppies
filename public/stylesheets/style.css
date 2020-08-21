@@ -1,3 +1,4 @@
+
 form.signup,
 form.login {
   margin-top: 50px;
@@ -9,6 +10,7 @@ body {
     color: #36454f;
     font-family: 'Advent Pro', sans-serif;
     font-size: medium;
+    
     
 }
 
@@ -38,6 +40,10 @@ img {
     border-radius: 50%;
     height: 175px;
     width: 175px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .description {
@@ -49,4 +55,39 @@ img {
     font-weight: bold;
 }
 
+#rowtwo {
+    padding: 50px;
+}
+#rowthree {
+    padding: 50px;
+}
+#rowfour {
+    padding: 50px;
+}
 
+.pleft {
+    text-align: center;
+
+}
+
+.pright {
+    text-align: center;
+}
+
+#aboutMeInput {
+    resize: none;
+}
+
+#aboutMe {
+    text-align:right;
+    display: inline-block;
+}
+
+#mastiff{
+    text-align:center;
+}
+
+.inlineblock {
+    text-align:center;
+
+}

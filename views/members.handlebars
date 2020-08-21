@@ -1,14 +1,17 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="inlineblock" class="card col-md-4" class="navbar-header">
       <a class="navbar-brand" href="/logout">
         Logout
       </a>
     </div>
+    <div class="inlineblock" class="card col-md-4"><h1>Patient-Puppies</h1></div>
+    <div class="inlineblock" class="card col-md-4">
     <form class="searchBar form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    </div>
   </div>
 </nav>
 
@@ -20,37 +23,56 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div id="picHere" class="card col-md-4">
-      <img src="" id="img-preview"/>
-      <label class="file-upload-container" for="file-upload">
-        <input id="file-upload" type="file">
-        Select an Image
-      </label>
-      <div class="col-md-12" id="aboutMe">
-        <label id="aboutMeLabel">Tell the world about yourself:</label>
-        <textarea id="aboutMeInput" rows="3"></textarea>
-        <button type="button" class="button" id="aboutMeBtn">Create About Me</button>
-      </div>
-    </div>
-    <div id="api-div" class="col-md-4">
-      <form class="field is-grouped" id="search-form">
-        <input class="input  is-expanded is-fullwidth" id="search-input" type="text" placeholder="Search">
-        <button type="button" class="button" id="submit-btn">Artist Search</button>
-      </form>
-      <p id="upcomingshows">Upcoming Shows</p>
-      <div id="pastapi-div">
-        <p id="upcomingshows">Past Shows</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <form>
-        <button type="button" class="button" id="save-btn">Save</button>
-        <input class="input  is-expanded is-fullwidth" id="save-input" type="text"
-          placeholder="Paste Event ID Here"><br>
-        <label for="eventID"></label><br>
-      </form>
+
+<div id="rowtwo" class="row">
+  <div id="picHere" class="card col-md-4">
+    <img src="" id="img-preview" />
+    <label class="file-upload-container" for="file-upload">
+      <input id="file-upload" type="file">
+      Select an Image
+    </label>
+    <br>
+    <div class="col-md-4" id="aboutMe">
+      <label id="aboutMeLabel">Tell the world about yourself:</label>
+      <textarea id="aboutMeInput" rows="3"></textarea>
+      <button type="button" class="button" id="aboutMeBtn">Create About Me</button>
     </div>
   </div>
+
+  <div class="col-md-4">
+    <form class="field is-grouped" id="search-form">
+      <input class="input  is-expanded is-fullwidth" id="search-input" type="text" placeholder="Search">
+      <button type="button" class="button" id="submit-btn">Artist Search</button>
+    </form>
+
+  </div>
+  <div class="col-md-4">
+    <form>
+      <button type="button" class="button" id="save-btn">Save</button>
+      <input class="input  is-expanded is-fullwidth" id="save-input" type="text" placeholder="Paste Event ID Here"><br>
+      <label for="eventID"></label><br>
+    </form>
+  </div>
+</div>
+<div id="rowthree" class="row">
+  <div class="col-md-3" id="aboutMe">
+    <textarea id="aboutMeInput" rows="3" placeholder="Tell the world about yourself:"></textarea>
+<br>
+
+    <button type="button" class="button" id="aboutMeBtn">Create About Me</button>
+  </div>
+  <div id="api-div" class="col-md-3">
+    <p class="pleft" id="upcomingshows">Upcoming Shows</p>
+  </div>
+  <div id="pastapi-div" class="col-md-3">
+    <p class="pright" id="upcomingshows">Past Shows</p>
+  </div>
+  <div class="col-md-3">
+    <p id="upcomingshows">Shows You Been To!!!</p>
+  </div>
+</div>
+<div id="rowfour" class="row">
+  <h1 id="mastiff">
+    This app was made by Kenneth Pruitt, Shane Runnels, and Alix Wawa.
+  </h1>
 </div>

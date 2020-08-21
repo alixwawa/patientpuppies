@@ -163,6 +163,8 @@ module.exports = function(app) {
   app.get("/members/getshowid", async (req, res) => {
     if (!req.user) {
       // console.log(req.user);
+      res.end();
+    } else {
       const oldSHows = await db.Oldshows.findAll({
         where: {
           UserId: req.user.id
