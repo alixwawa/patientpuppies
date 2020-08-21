@@ -72,7 +72,7 @@ $(document).ready(() => {
       url:
         "https://api.songkick.com/api/3.0/search/artists.json?apikey=pE1BwpmMDHJdfs9n&query=" +
         artist,
-      method: "GET",
+      method: "GET"
     }).then((response) => {
       const artistID = response.resultsPage.results.artist[0].id;
       //api for upcomming shows
@@ -81,7 +81,7 @@ $(document).ready(() => {
           "https://api.songkick.com/api/3.0/artists/" +
           artistID +
           "/calendar.json?apikey=pE1BwpmMDHJdfs9n",
-        method: "GET",
+        method: "GET"
       }).then((response) => {
         const songKickRes = response.resultsPage.results.event;
         songKickRes.forEach((data) => {
@@ -200,13 +200,17 @@ $(document).ready(() => {
       type: "POST",
       url: "/members/sendShowId",
       data: {
-        oldshowID: showID,
-      },
-    }).then((res) => {
-      console.log(res);
-
-      console.log("res");
-    });
+        oldshowID: showID
+      }
+    })
+      .then(res => {
+        // console.log(res);
+        // console.log("res");
+      })
+      .catch(err => {
+        alert("can't save same ID twice");
+        console.log(err);
+      });
   };
 
   $("#save-btn").on("click", () => {
@@ -216,13 +220,23 @@ $(document).ready(() => {
     // userInput.val('');
   });
 
-  sendAboutMe = (aboutMeInput) => {
+  gettingSetting = () => {
+    $.get("/members/getshowid")
+    .then(data => {
+      console.log(data);
+      data.forEach(blah => console.log(blah.oldShowID));
+    });
+  };
+
+  gettingSetting();
+
+  sendAboutMe = aboutMeInput => {
     $.ajax({
       type: "PUT",
       url: "/members/aboutMe",
       data: {
-        aboutMe: aboutMeInput,
-      },
+        aboutMe: aboutMeInput
+      }
     });
   };
 
@@ -235,17 +249,17 @@ $(document).ready(() => {
 
   $.get("/members/getAboutMe").then(data => {
     console.log(data.aboutMe);
-    if (data !== " " && data !== "") {
-      $("#aboutMeLabel").remove();
-      $("#aboutMeInput").remove(); 
-      $("#aboutMeBtn").remove();
-      $("#aboutMe").append(`<h1 id=#willerasemaybe> ${data.aboutMe} </h1>`).append('<button id="secondbutton">Update About Me</button>');
-    }
+    // if (data !== "") {
+      // $("#aboutMeLabel").remove();
+      // $("#aboutMeInput").remove();
+      // $("#aboutMeBtn").remove();
+      // $("#aboutMe").append(`<h1 id=#willerasemaybe> ${data.aboutMe} </h1>`).append('<button id="secondbutton">Update About Me</button>');
+    // }
   });
   
-  $("#secondbutton").on("click", () => {
-    $('#willerasemaybe').remove();
+  // $("#secondbutton").on("click", () => {
+  //   $('#willerasemaybe').remove();
     // the button on line 242. If it's clicked, remove h1 field with text and then append 
     // an input field. Use the same ID that we used to grab the info the first time (aboutMeInput)
-  }); 
+  // }); 
 });

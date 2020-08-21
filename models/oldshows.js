@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   const Oldshows = sequelize.define("Oldshows", {
     oldShowID: {
       type: DataTypes.INTEGER,
+      unique: true,
       allowNull: false,
       validate: {
         len: [1]

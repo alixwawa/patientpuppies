@@ -92,7 +92,6 @@ module.exports = function(app) {
       res.end();
       //   // console.log("im here");
       //   //   // The user is not logged in, send back an empty object
-      res.json({});
     } else {
       //   //   // Otherwise send back the user's email and id
       //   //   // Sending back a password, even a hashed password, isn't a good idea
@@ -122,23 +121,22 @@ module.exports = function(app) {
         oldShowID: req.body.oldshowID,
         UserId: req.user.id
       };
-      console.log(insertOldShow);
+      // console.log(insertOldShow);
       // console.log(req.user.id);
       db.Oldshows.create(insertOldShow)
         .then(dbShows => {
-          console.log("thanks");
+          // console.log("thanks");
           res.json(dbShows);
           // res.redirect(307, "/members");
         })
         .catch(err => {
-          console.log("hi");
           res.status(401).json(err);
         });
     } else {
       console.log('not user')
     }
   });
-
+  
   app.put("/members/aboutMe", (req, res) => {
     // if (!req.user) {
 
@@ -160,6 +158,21 @@ module.exports = function(app) {
         }
       }
     );
+  });
+
+  app.get("/members/getshowid", async (req, res) => {
+    if (!req.user) {
+      // console.log(req.user);
+      res.end();
+    } else {
+      const oldSHows = await db.Oldshows.findAll({
+        where: {
+          UserId: req.user.id
+        }
+      });
+
+      res.json(oldSHows);
+    }
   });
 
   app.get("/members/getAboutMe", async (req, res) => {
@@ -186,5 +199,4 @@ module.exports = function(app) {
       res.json(getAboutMe);
     }
   });
-
 };
