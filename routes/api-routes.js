@@ -136,31 +136,28 @@ module.exports = function(app) {
       console.log('not user')
     }
   });
-  
+
   app.put("/members/aboutMe", (req, res) => {
     if (!req.user) {
-
-    res.end();
-
-    //   // The user is not logged in, send back an empty object
-    //   res.json({});
+      res.end();
+      //   // The user is not logged in, send back an empty object
+      //   res.json({});
     } else {
-    //   // Otherwise send back the user's email and id
-    //   // Sending back a password, even a hashed password, isn't a good idea
-    console.log(req.body);
-    db.User.update(
-      {
-        aboutMe: req.body.aboutMe
-      },
-      {
-        where: {
-          id: req.user.id
+      //   // Otherwise send back the user's email and id
+      //   // Sending back a password, even a hashed password, isn't a good idea
+      console.log(req.body);
+      db.User.update(
+        {
+          aboutMe: req.body.aboutMe
+        },
+        {
+          where: {
+            id: req.user.id
+          }
         }
-      }
-    )
+      );
     }
   });
-  
 
   app.get("/members/getshowid", async (req, res) => {
     if (!req.user) {

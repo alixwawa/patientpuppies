@@ -10,7 +10,6 @@ const exphbs = require("express-handlebars");
 const PORT = process.env.PORT || 8080;
 const db = require("./models");
 
-
 // Creating express app and configuring middleware needed for authentication
 const app = express();
 app.use(express.urlencoded({ extended: true }));

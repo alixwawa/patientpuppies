@@ -85,7 +85,7 @@ $(document).ready(() => {
         method: "GET"
       }).then((response) => {
         const songKickRes = response.resultsPage.results.event;
-        songKickRes.forEach((data) => {
+        songKickRes.forEach(data => {
           if (data) {
             // console.log(data.venue.displayName);
             // console.log(data.location.city);
@@ -134,10 +134,10 @@ $(document).ready(() => {
           "https://api.songkick.com/api/3.0/artists/" +
           artistID +
           "/gigography.json?apikey=pE1BwpmMDHJdfs9n",
-        method: "GET",
-      }).then((response) => {
+        method: "GET"
+      }).then(response => {
         const songKickRes = response.resultsPage.results.event;
-        songKickRes.forEach((data) => {
+        songKickRes.forEach(data => {
           if (data) {
             // console.log(data.venue.displayName);
             // console.log(data.location.city);
@@ -195,7 +195,7 @@ $(document).ready(() => {
     userInput.val("");
   });
 
-  sendPastShowID = (showID) => {
+  sendPastShowID = showID => {
     // console.log(showID);
     $.ajax({
       type: "POST",
@@ -206,7 +206,7 @@ $(document).ready(() => {
     })
       .then(res => {
         // console.log(res);
-        // console.log("res");
+        console.log("Id sent");
       })
       .catch(err => {
         alert("can't save same ID twice");
@@ -255,7 +255,7 @@ $(document).ready(() => {
           const listshowType = $("<li>").html(
             "<span class='clearLater'>Event Type: </span>" + showType
           );
-         const deleteButtons = $(`<li type="button" class="button" id="deleteButton">Show ID: ${showID} </li>`);
+          const deleteButtons = $(`<li>Show ID: ${showID} </li>`);
           eventList
             .append(listdisplayName)
             .append(listlocation)
@@ -311,7 +311,7 @@ $(document).ready(() => {
     // the button on line 242. If it's clicked, remove h1 field with text and then append
     // an input field. Use the same ID that we used to grab the info the first time (aboutMeInput)
   });
-  sendPastShowID = deletedid => {
+  deletePastShowID = deletedid => {
     console.log(deletedid);
     $.ajax({
       type: "DELETE",
@@ -324,7 +324,7 @@ $(document).ready(() => {
 
   $(document).on("click", "#dell-btn", () => {
     console.log('delete');
-    sendPastShowID(deleteInputField.val());
+    deletePastShowID(deleteInputField.val());
     deleteInputField.val("");
     // userInput.val('');
     location.reload();
