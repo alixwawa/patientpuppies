@@ -73,7 +73,7 @@ $(document).ready(() => {
       url:
         "https://api.songkick.com/api/3.0/search/artists.json?apikey=pE1BwpmMDHJdfs9n&query=" +
         artist,
-      method: "GET"
+      method: "GET",
     }).then((response) => {
       const artistID = response.resultsPage.results.artist[0].id;
       //api for upcomming shows
@@ -82,7 +82,7 @@ $(document).ready(() => {
           "https://api.songkick.com/api/3.0/artists/" +
           artistID +
           "/calendar.json?apikey=pE1BwpmMDHJdfs9n",
-        method: "GET"
+        method: "GET",
       }).then((response) => {
         const songKickRes = response.resultsPage.results.event;
         songKickRes.forEach(data => {
@@ -201,14 +201,14 @@ $(document).ready(() => {
       type: "POST",
       url: "/members/sendShowId",
       data: {
-        oldshowID: showID
-      }
+        oldshowID: showID,
+      },
     })
-      .then(res => {
+      .then((res) => {
         // console.log(res);
         console.log("Id sent");
       })
-      .catch(err => {
+      .catch((err) => {
         alert("can't save same ID twice");
         console.log(err);
       });
@@ -223,15 +223,15 @@ $(document).ready(() => {
   });
 
   gettingSetting = () => {
-    $.get("/members/getshowid").then(data => {
+    $.get("/members/getshowid").then((data) => {
       // console.log(data);
-      data.forEach(blah => {
+      data.forEach((blah) => {
         // console.log(blah.oldShowID);
         const saveoldshowids = blah.oldShowID;
         $.ajax({
           url: `https://api.songkick.com/api/3.0/events/${saveoldshowids}.json?apikey=pE1BwpmMDHJdfs9n`,
-          method: "GET"
-        }).then(moreblah => {
+          method: "GET",
+        }).then((moreblah) => {
           const beentoresults = moreblah.resultsPage.results.event;
           const displayName = beentoresults.venue.displayName;
           const location = beentoresults.location.city;
@@ -256,6 +256,7 @@ $(document).ready(() => {
             "<span class='clearLater'>Event Type: </span>" + showType
           );
           const deleteButtons = $(`<li>Show ID: ${showID} </li>`);
+
           eventList
             .append(listdisplayName)
             .append(listlocation)
@@ -272,17 +273,17 @@ $(document).ready(() => {
 
   gettingSetting();
 
-  sendAboutMe = newdata => {
+  sendAboutMe = (newdata) => {
     console.log(newdata);
     $.ajax({
       type: "PUT",
       url: "/members/aboutMe",
       data: {
-        aboutMe: newdata
-      }
+        aboutMe: newdata,
+      },
     });
   };
-//had to use document.on here because apparently the button was being rendered by ajax???
+  //had to use document.on here because apparently the button was being rendered by ajax???
   $(document).on("click", "#aboutMeBtn", () => {
     console.log("pleasework");
     // sendAboutMe(aboutMeInput.val());
@@ -291,7 +292,7 @@ $(document).ready(() => {
     location.reload();
   });
 
-  $.get("/members/getAboutMe").then(data => {
+  $.get("/members/getAboutMe").then((data) => {
     console.log(data.aboutMe);
     if (data.aboutMe === " " || data.aboutMe === "" || !data.aboutMe) {
       console.log("need info");
@@ -299,32 +300,46 @@ $(document).ready(() => {
       $("#aboutMeLabel").remove();
       $("#aboutMeInput").remove();
       $("#aboutMeBtn").remove();
-      $("#aboutMe").append(`<textarea style="resize:none;" id="willerasemaybe"> ${data.aboutMe} </textarea>`).append("<br>").append('<button id="secondbutton">Update About Me</button>');
+      $("#aboutMe")
+        .append(
+          `<textarea style="resize:none;" id="willerasemaybe"> ${data.aboutMe} </textarea>`
+        )
+        .append("<br>")
+        .append('<button id="secondbutton">Update About Me</button>');
     }
   });
 
   $(document).on("click", "#secondbutton", () => {
     $("#willerasemaybe").remove();
     $("#secondbutton").remove();
-    $("#aboutMe").append("<textarea id='aboutMeInput' placeholder='Update Here:'></textarea>").append("<br>").
-      append("<button type='button' class='button' id='aboutMeBtn'>Create About Me</button>");
+    $("#aboutMe")
+      .append(
+        "<textarea id='aboutMeInput' placeholder='Update Here:'></textarea>"
+      )
+      .append("<br>")
+      .append(
+        "<button type='button' class='button' id='aboutMeBtn'>Create About Me</button>"
+      );
     // the button on line 242. If it's clicked, remove h1 field with text and then append
     // an input field. Use the same ID that we used to grab the info the first time (aboutMeInput)
   });
+
   deletePastShowID = deletedid => {
+
     console.log(deletedid);
     $.ajax({
       type: "DELETE",
       url: "/deletememory",
       data: {
-        oldShowID: deletedid
-      }
+        oldShowID: deletedid,
+      },
     });
   };
 
   $(document).on("click", "#dell-btn", () => {
     console.log('delete');
     deletePastShowID(deleteInputField.val());
+
     deleteInputField.val("");
     // userInput.val('');
     location.reload();
