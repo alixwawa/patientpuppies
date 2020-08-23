@@ -1,15 +1,13 @@
-# Welcome to **"Patient Puppies App"** :headphones:
+# Welcome to **"Patient Puppies App"** :musical_note: :loud_sound:
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-> Patient Puppies App is a simple app created with Node.js to serve as a virtual database (a bucketlist) containing movies that the user intends to search for music and artist and see recent shows. 
+> Patient Puppies App is an app created with Node.js, JS, CSS, HTML, and etc to serve as a virtual database containing movies that the user intends to search for music and artist and see recent shows. 
 
-**"For those of you in the cheap seats I'd like ya to clap your hands to this one; the rest of you can just rattle your jewelry!" - John Lennon **
+### [Homepage](https://patientpuppies.herokuapp.com/)
 
-### :headphones: [Homepage]( )
-
-### ✨ [Demo]( )
+### ✨ [Demo](Pics\Vids\demo.webm)
 
 ## :arrow_down: Install 
 
@@ -33,11 +31,19 @@ Deployed on Heroku
 - Sequelize
 - mySQL
 - Passport.js
+- Cloudinary
 
 
-## :man_dancing: Future Development 
+## Future Development 
 
-> ****Need to finish this part****
+> Add an update feature for profile picture
+- Add a friends list feature.
+- Add a feature to be able to view other people’s profiles in read only format.
+- Make the save and delete functions for the show ID’s able to be accessed by clicking on ID (instead of having to drop the ID in the input field. 
+- Style the page some more…. Make it more responsive. 
+- Add ability to store videos per show.
+- Add ability to livestream. 
+
 
 ## :fist: Team
 
