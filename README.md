@@ -40,7 +40,7 @@ Deployed on Heroku
 - Add a friends list feature.
 - Add a feature to be able to view other people’s profiles in read only format.
 - Make the save and delete functions for the show ID’s able to be accessed by clicking on ID (instead of having to drop the ID in the input field. 
-- Style the page some more…. Make it more responsive. 
+- Style the page some more…. Make it look better on smaller windows/cellphones. 
 - Add ability to store videos per show.
 - Add ability to livestream. 
 
