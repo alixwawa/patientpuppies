@@ -28,8 +28,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Requiring our routes
-require("./routes/html-routes.js")(app);
-require("./routes/api-routes.js")(app);
+require("./controllers/html-routes.js")(app);
+require("./controllers/api-routes.js")(app);
 // require("./routes/cloudinary-routes.js")(app);
 
 // Syncing our database and logging a message to the user upon success
